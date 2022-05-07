@@ -8,19 +8,36 @@
 <body>
 <div class="edit-task">
     <form th:object="${tsks}" th:action="@{'/'}" method="get">
-        <button type="submit" class="btn btn-primary">Logout</button>
+        <button type="submit" class="btn btn-primary logout-btn">Logout</button>
+    </form>
+    <h2> Edit Tasks</h2>
+    <form action="#" th:action="@{/save}" class="task-form" th:object="${tasktbedited}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="${tasktbedited.uid}"/>
+        <input type="hidden" th:field="${tasktbedited.lastUpdtd}"/>
+        <div class="form-group">
+            Description: <input type="text" class="form-control task-input" id="name" th:field="${tasktbedited.description}"/>
+        </div>
+        <button type="submit" class="btn btn-primary update-btn">Update</button>
     </form>
 </div>
-<div></div>
-<h2> Edit Tasks</h2>
-<form action="#" th:action="@{/save}" th:object="${tasktbedited}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-    <input type="hidden" th:field="${tasktbedited.uid}"/>
-    <input type="hidden" th:field="${tasktbedited.lastUpdtd}"/>
-    <div class="form-group">
-        Description: <input type="text" class="form-control" id="name" th:field="${tasktbedited.description}"/>
-    </div>
-    <button type="submit" class="btn btn-primary">Update</button>
-</form>
 </body>
 </html>
+<style>
+    body {
+        padding: 20px;
+    }
+    .edit-task {
+        width: 70%;
+        margin: auto;
+    }
+    .logout-btn {
+        float: right;
+    }
+    .task-input {
+        width: 50%;
+    }
+    .task-form {
+        margin-top: 30px;
+    }
+</style>

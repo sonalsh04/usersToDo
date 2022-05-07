@@ -5,46 +5,63 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>TODO App</title>
 </head>
+<style>
+    body {
+        padding: 20px;
+    }
+    .logout button {
+        float: right;
+    }
+    .parent {
+        width: 70%;
+        margin: auto;
+    }
+    .task-table {
+        margin-top: 30px;
+    }
+</style>
 <body>
-<div class="container">
-    <form th:object="${tsks}" th:action="@{'/'}" method="get">
-        <button type="submit" class="btn btn-primary">Logout</button>
-    </form>
-</div>
-<div></div>
-<div class="container">
-    <section>
-        <table class="table">
-            <thead>
-            </thead>
-            <tbody>
-            <h2>User Tasks</h2>
-            <tr th:each="tasks: ${userTasks}">
-                <!--                    <td th:text="${tasks.id}">Id</td>-->
-                <td th:text="${tasks.description}">Description</td>
-                <td th:text="${tasks.lastUpdtd}">Last Updated</td>
-                <td><form th:action="@{'/updateCompleted'+'/'+ ${tasks.id}}" th:object="${tasks}" method="post" >
-                    <input type="checkbox" name="my-checkbox" onclick="submit();" th:checked="${tasks.checked} == true"/>
-<!--                           th:field="${tasks.checked}"/>-->
-                    <input type="hidden" th:field="${forChecked.description}" />
-                    <input type="hidden" th:field="${forChecked.uid}"/>
-                    <input type="hidden" th:field="${forChecked.id}"/>
-                </form>
-                </td>
-                <td>
-                    <a th:href="@{'/edit/' + ${tasks.id} + '/' + ${tasks.id}}" >Edit</a>
-                    <a th:href="@{'/delete/'+  ${tasks.uid} + '/' + ${tasks.id}}">Delete</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
-</div>
+<div class="parent">
+    <div class="logout">
+        <form th:object="${tsks}" th:action="@{'/'}" method="get">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+    </div>
+    <div></div>
+    <div class="container">
+        <section>
+            <table class="task-table table table-striped">
+                <thead>
+                </thead>
+                <tbody>
+                <h2>User Tasks</h2>
+                <tr th:each="tasks: ${userTasks}">
+                    <td th:text="${tasks.description}">Description</td>
+                    <td th:text="${tasks.lastUpdtd}">Last Updated</td>
+                    <td><form th:action="@{'/updateCompleted'+'/'+ ${tasks.id}}" th:object="${tasks}" method="post" >
+                        <input type="checkbox" name="my-checkbox" onclick="submit();" th:checked="${tasks.checked} == true"/>
+                        <input type="hidden" th:field="${forChecked.description}" />
+                        <input type="hidden" th:field="${forChecked.uid}"/>
+                        <input type="hidden" th:field="${forChecked.id}"/>
+                    </form>
+                    </td>
+                    <td>
+                        <a th:href="@{'/edit/' + ${tasks.id} + '/' + ${tasks.id}}" >Edit</a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/delete/'+  ${tasks.uid} + '/' + ${tasks.id}}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
 
-<div class="container">
-    <form th:object="${tsks}" th:action="@{'/addToDo/' + ${tsks.uid}}" method="post">
-        <button type="submit" class="btn btn-primary">Create a new task</button>
-    </form>
+    <div class="container">
+        <form th:object="${tsks}" th:action="@{'/addToDo/' + ${tsks.uid}}" method="post">
+            <button type="submit" class="btn btn-primary">Create a new task</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
