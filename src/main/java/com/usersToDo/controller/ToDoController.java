@@ -51,7 +51,7 @@ public class ToDoController {
 
     @PostMapping(value="/updateCompleted/{id}")
     public String update(@PathVariable String id){
-        ToDoItm toDoItm= toDoRepo.findTaskById(id);
+        ToDoItm toDoItm= toDoRepo.findById(id).get();
         toDoItm.setLastUpdtd();
         toDoItm.setChecked(!toDoItm.isChecked());
         toDoRepo.save(toDoItm);
