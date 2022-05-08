@@ -23,3 +23,6 @@ ________________________________________________________________________________
 3. Open IDE, File > Open > choose project's pom.xml from the location in step 2. > Open as project. Wait for dependencies
 	 to download.
 4. Navigate to UsersToDoApplication.java and run it.
+
+**Note**
+It has been tested with the OpenJDK v17.0.1
